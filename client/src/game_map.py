@@ -55,17 +55,15 @@ class GameMap:
 
     def load_map(self, path: str) -> None:
         with open(path, "r") as map_file:
-            values = json.load(map_file)        
-        dice = 0
+            values = json.load(map_file)
+        desert_names = []
         for i in range(len(values["tile"])):
-            if values["tile"][i]:
-                self.hexagons.append(Hexagon(i, values["tile"][i], values["value"][dice + i]))
-            else:
-                self.hexagons.append(Hexagon(i, None, 0))
+            self.hexagons.append(Hexagon(i, values["tile"][i], values["value"][i]))
+            if values["value"][i] < 2 or values["value"][i] > 12:
+                desert_names.append(values["tile"][i])
                 self.thief = Thief(i)
-                dice = -1
         self.ressources = list(set(values["tile"]))
-        self.ressources = [i for i in self.ressources if i]
+        self.ressources = [i for i in self.ressources if not i in desert_names]
 
     def make_map(self):
         # Make Points
