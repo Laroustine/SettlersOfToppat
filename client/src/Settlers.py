@@ -1,10 +1,11 @@
-from game_map import GameMap
+#!/usr/bin/python3
+from Game_map import GameMap
 import pygame
 import sys
 import os
 
 def main():
-    chance = GameMap("examples/map2.json").chance
+    chance = GameMap("examples/map.json").chance
     for key in chance.res:
         print(f"{key}, {chance.item_chance(key) * 100:.2f}%")
     # m
