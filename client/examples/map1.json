@@ -1,0 +1,43 @@
+{
+  "tile": [
+    "sheep",
+    "hay",
+    "clay",
+    "wood",
+    "sheep",
+    "hay",
+    "rock",
+    "rock",
+    "wood",
+    "hay",
+    "sheep",
+    "wood",
+    "wood",
+    "rock",
+    "clay",
+    "",
+    "hay",
+    "sheep",
+    "clay"
+  ],
+  "value": [
+    11,
+    6,
+    5,
+    2,
+    8,
+    3,
+    10,
+    8,
+    4,
+    9,
+    5,
+    10,
+    4,
+    11,
+    6,
+    3,
+    12,
+    9
+  ]
+}
