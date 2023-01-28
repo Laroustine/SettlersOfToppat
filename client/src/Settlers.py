@@ -1,5 +1,5 @@
 #!/usr/bin/python3
-from Game_map import GameMap
+from my_map.Game_map import GameMap
 import pygame
 import sys
 import os

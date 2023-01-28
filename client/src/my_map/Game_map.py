@@ -1,5 +1,5 @@
-from my_map.hexagon import CityLink, CityPoints
-from my_map.thief import Thief
+from my_map.my_map.hexagon import CityLink, CityPoints
+from my_map.my_map.thief import Thief
 import json
 
 class Hexagon:
