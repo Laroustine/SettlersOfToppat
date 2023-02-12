@@ -73,9 +73,15 @@ impl Board {
     }
 
     pub fn to_json(&self) -> String {
-        let title: Vec::<&str> = self.board.iter().map(|(_,v)| v.resource.to_str()).collect();
-        let value: Vec::<u8>   = self.board.iter().map(|(_,v)| v.roll).collect();
-        format!("{{\"title\": {:?}, \"value\": {:?}}}", title, value) 
+        let iter = self.board.values();
+        let mut t: Vec::<&str> = Vec::<&str>::new();
+        let mut v: Vec::<u8> = Vec::<u8>::new();
+        for h in iter {
+            t.push(h.resource.to_str());
+            v.push(h.roll);
+        }
+
+        format!("{{\"title\": {:?}, \"value\": {:?}}}", t, v) 
     }
 }
 
