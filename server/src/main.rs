@@ -1,7 +1,9 @@
 mod setup;
 mod map;
+mod resource;
 
 use crate::map::*;
+use crate::resource::*;
 use std::collections::HashMap;
 
 fn main() {
@@ -29,6 +31,10 @@ fn main() {
     println!("{}", Resource::Wood.to_str());
     println!("{}",m2.to_json());
     //println!("{}", m.to_json());
+    let mut vec: Vec::<i32> = Vec::<i32>::new();
+    vec.push(0);
+    vec.push(1);
+    println!("{}",format!("{:?}", vec));
     server::server();
     
 }
