@@ -1,15 +1,15 @@
 //the  coordanates system is defined as fommows:
 //     /  \ /  \ / \
-//    |0,-1| 2,0|2,1|
-//   /  \  / \  / \ / \
-//  | 1,-2|1,-1|1,1|1,2|
-// /  \ /  \  / \ /  \ / \
-//|0, 0|0, 1|0, 2|0, 3|0, 4|
-// \  / \ /  \ /  \ / \  /
-// |-1,0|-1,1|-1,2|-1,3|
-//  \  / \  / \  / \  /
-//   |-2,0|-2,1|-2,2|
-//     \ /  \ /  \ /
+//    |-2,0| 2,1|2,2|
+//   / \  / \  / \ / \
+//  |1,0|1,-1|1,2|1,3|
+// /  \ / \ /  \ / \ / \
+//|0, 0|0,1| 0,2|0, 3|0,4|
+// \ / \ / \ / \ / \  /
+//  |1,0|1,1|1,2|-1,3|
+//  \ / \ / \ / \ /
+//   |2,0|2,1|2,2|
+//    \ / \ / \ /
 //
 // Every intersection point is uniquely defined by 
 // the 3 neighbouring hexagons
@@ -47,22 +47,22 @@ impl Board {
     pub fn new() -> Self {
         let n = 5; //number of rows (= length of middle row)
         let mut m: Board = Board {board: HashMap::<Coord, Hex>::new()};
-        for i in 0..((n+1)/2) { //to keep a hexagon, the shortest row is of length (n+1)/2.
-            for j in 0..(n-i) {
-                let c1 = Coord{x: i, y:j};
-                let c2 = Coord{x:-i, y:j};
-                m.board.insert(c1, Hex {
-                    coord: Coord{x:i, y:j},
-                    resource: Resource::Desert,
-                    roll: 0,
-                    player_rank: None
-                });
-                m.board.insert(c2, Hex {
-                    coord: Coord{x:-1,y:j},
-                    resource: Resource::Desert,
-                    roll: 0,
-                    player_rank: None
-                });
+        for i in 0..3 { //to keep a hexagon, the shortest row is of length (n+1)/2.
+            for j in 0..(5-i) {
+                m.board.insert(Coord{x:i, y:j},
+                               Hex {
+                                   coord: Coord{x:i, y:j},
+                                   resource: Resource::Desert,
+                                   roll: 0,
+                                   player_rank: None
+                               });
+                m.board.insert(Coord{x:-i, y:j},
+                               Hex {
+                                   coord: Coord{x:-i, y:j},
+                                   resource: Resource::Desert,
+                                   roll: 0,
+                                   player_rank: None
+                               });
             }
         }
         m
@@ -83,5 +83,20 @@ impl Board {
 
         format!("{{\"title\": {:?}, \"value\": {:?}}}", t, v) 
     }
+    pub fn to_json_with_coords(&self) -> String {
+        let iter = self.board.values();
+        let mut t: Vec::<&str> = Vec::<&str>::new();
+        let mut v: Vec::<u8> = Vec::<u8>::new();
+        let mut c: Vec::<(i32,i32)> = Vec::<(i32,i32)>::new();
+        for h in iter {
+            t.push(h.resource.to_str());
+            v.push(h.roll);
+            let (a,b) = (h.coord.x, h.coord.y);
+            c.push((a,b));
+        }
+
+        format!("{{\"title\": {:?}, \"value\": {:?}, \"coords\": {:?}}}", t, v,c) 
+    }
+
 }
 
