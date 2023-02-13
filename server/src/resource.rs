@@ -1,7 +1,7 @@
 use crate::map::*;
 use crate::player::Player;
 
-#[derive(Eq, Hash, PartialEq)]
+#[derive(Eq, Hash, PartialEq, Debug)]
 pub enum Resource {
     Wool,
     Grain,
@@ -25,6 +25,7 @@ impl Resource {
     }
 }
 
+#[derive(Eq, Hash, PartialEq, Debug)]
 pub enum Building {
     Road,
     Settlement,

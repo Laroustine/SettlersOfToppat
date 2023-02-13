@@ -4,6 +4,8 @@ mod map_impl;
 mod resource;
 mod player;
 
+mod tests;
+
 use std::collections::HashMap;
 
 use crate::map::*;
@@ -37,6 +39,11 @@ fn main() {
     let mut p = Player::new();
     p.resources.insert(Resource::Brick, 1);
     p.resources.insert(Resource::Lumber, 1);
-    println!("p has enough for road: {}", p.has_enough(Building::Road));
+    println!("player brick: {}\nplayer lumber: {}\nplayer wool: {}", *p.resources.get(&Resource::Brick).unwrap(), *p.resources.get(&Resource::Lumber).unwrap(), *p.resources.get(&Resource::Wool).unwrap());
+    let mut pt = Point{building: None, x:Coord{x:0,y:0}, y: Coord{x:0,y:1}, z: None};
     println!("p has enough for settlement: {}", p.has_enough(Building::Settlement));
+    p.build(&Building::Settlement, &mut pt);
+    println!("p has enough for road: {}", p.has_enough(Building::Road));
+    p.build(&Building::Road, &mut pt); 
+    println!("player brick: {}\nplayer lumber: {}\nplayer wool: {}", *p.resources.get(&Resource::Brick).unwrap(), *p.resources.get(&Resource::Lumber).unwrap(), *p.resources.get(&Resource::Wool).unwrap());
 }

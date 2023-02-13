@@ -20,8 +20,6 @@ pub fn dice_roll() -> u8 {
  * @ensures: returns a randomized starting game board
  */
 pub fn create_map() -> Board {
-    let mut board = Board::new();
-
     //all the resources to place on the map (except the desert)
     let mut resources = vec![
         Resource::Wool, Resource::Wool, Resource::Wool, Resource::Wool,

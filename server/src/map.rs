@@ -1,12 +1,12 @@
 //the  coordanates system is defined as fommows:
-//     /  \ /  \ / \
-//    |-2,0| 2,1|2,2|
-//   / \  / \  / \ / \
-//  |1,0|1,-1|1,2|1,3|
-// /  \ / \ /  \ / \ / \
-//|0, 0|0,1| 0,2|0, 3|0,4|
+//     /  \ /  \ /  \
+//    |-2,0|-2,1|*2,2|
+//   / \  / \  / \  /  \
+//  |-1,0|-1,1|-1,2|-1,3|
+// / \ /  \  / \  / \  /
+//|0, 0|0,1|0,2|0,3|0,4|
 // \ / \ / \ / \ / \  /
-//  |1,0|1,1|1,2|-1,3|
+//  |1,0|1,1|1,2|1,3|
 //  \ / \ / \ / \ /
 //   |2,0|2,1|2,2|
 //    \ / \ / \ /
@@ -32,7 +32,7 @@ pub struct Hex {
 }
 
 pub struct Point {
-    pub building: Building,
+    pub building: Option<(Building, u8)>, //the building, and the player it belongs to
     pub x: Coord,
     pub y: Coord,
     pub z: Option<Coord>,
