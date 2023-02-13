@@ -24,11 +24,11 @@ pub fn create_map() -> Board {
 
     //all the resources to place on the map (except the desert)
     let mut resources = vec![
-        Resource::Sheep, Resource::Sheep, Resource::Sheep, Resource::Sheep,
-        Resource::Hay, Resource::Hay, Resource::Hay, Resource::Hay,
-        Resource::Wood, Resource::Wood, Resource::Wood, Resource::Wood,
-        Resource::Rock, Resource::Rock, Resource::Rock,
-        Resource::Clay, Resource::Clay, Resource::Clay,];
+        Resource::Wool, Resource::Wool, Resource::Wool, Resource::Wool,
+        Resource::Grain, Resource::Grain, Resource::Grain, Resource::Grain,
+        Resource::Lumber, Resource::Lumber, Resource::Lumber, Resource::Lumber,
+        Resource::Ore, Resource::Ore, Resource::Ore,
+        Resource::Brick, Resource::Brick, Resource::Brick,];
     resources.shuffle(&mut thread_rng());
 
     //all the possible dice rolls to place on the map (except for the desert, marked with 0)

@@ -1,10 +1,14 @@
 mod setup;
 mod map;
+mod map_impl;
 mod resource;
+mod player;
+
+use std::collections::HashMap;
 
 use crate::map::*;
 use crate::resource::*;
-use std::collections::HashMap;
+use crate::player::Player;
 
 fn main() {
     let m = setup::create_map();
@@ -13,7 +17,7 @@ fn main() {
         Coord{x:0,y:0}, 
         Hex {
             coord: Coord{x:0,y:0},
-            resource: Resource::Wood,
+            resource: Resource::Lumber,
             roll: 0,
             player_rank: None
         });
@@ -21,7 +25,7 @@ fn main() {
         Coord{x:0,y:1},
         Hex{
             coord: Coord{x:0,y:0},
-            resource: Resource::Clay,
+            resource: Resource::Brick,
             roll: 1,
             player_rank: Some(vec![0])
         });
@@ -30,4 +34,9 @@ fn main() {
     println!("{}", m.to_json_with_coords());
     server::server();
     
+    let mut p = Player::new();
+    p.resources.insert(Resource::Brick, 1);
+    p.resources.insert(Resource::Lumber, 1);
+    println!("p has enough for road: {}", p.has_enough(Building::Road));
+    println!("p has enough for settlement: {}", p.has_enough(Building::Settlement));
 }

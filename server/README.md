@@ -6,3 +6,7 @@ cargo
 # build
 
 use `cargo build` at root of the server directory
+
+# run
+
+use `cargo run`
