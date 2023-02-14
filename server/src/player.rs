@@ -4,8 +4,8 @@ use crate::resource::*;
 use crate::resource::Resource::*;
 
 pub struct Player {
-    rank: u8,
-    points: u8,
+    pub rank: u8,
+    pub points: u8,
     pub buildings: HashMap<Building, u8>,
     pub resources: HashMap<Resource, u8>
 }
@@ -54,10 +54,26 @@ impl Player {
     // this indicates to the point "point" that it is occupied by a building.
     // to create a road between two points, this must be called twice
     pub fn build(&mut self, build_type: &Building, point: &mut Point) {
+
+        // look if the point is already occupied
         match &point.building {
-            Some(b) => {
-                println!("Point already occupied");
-                return ();
+            Some((b,r)) => match (b,r) {
+                // if it is occupied, and it is my settelment, and i'm trying to make a city,
+                // proceed  
+                // if not, do nothing
+                (&Building::Settlement, x) if *x==self.rank => {
+                    match build_type {
+                        Building::City => (),
+                        _ => {
+                            println!("Point already occupied");
+                            return ();
+                        },
+                    }}
+
+                _ => {
+                    println!("Point already occupied");
+                    return ();
+                }
             },
             None => (),
         }
@@ -90,6 +106,9 @@ impl Player {
                 point.building = Some((Building::City, self.rank));
                 *self.resources.get_mut(&Ore).unwrap()   -= 3;
                 *self.resources.get_mut(&Grain).unwrap() -= 2;
+
+                //refund the upraded Settlement
+                *self.buildings.get_mut(&Building::Settlement).unwrap() += 1;
             }
         }
         *self.buildings.get_mut(&build_type).unwrap() -= 1;

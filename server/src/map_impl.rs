@@ -4,8 +4,11 @@ use crate::resource::*;
 
 impl Board {
     pub fn new() -> Self {
-        let n = 5; //number of rows (= length of middle row)
-        let mut m: Board = Board {board: HashMap::<Coord, Hex>::new()};
+        let mut m: Board = 
+            Board {
+                board: HashMap::<Coord, Hex>::new(),
+                points: HashMap::<Point, Option<(Building, u8)>>::new()
+            };
         for i in 0..3 { //to keep a hexagon, the shortest row is of length (n+1)/2.
             for j in 0..(5-i) {
                 m.board.insert(Coord{x:i, y:j},
