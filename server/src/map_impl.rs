@@ -62,3 +62,62 @@ impl Board {
 
 }
 
+impl Hex {
+    pub fn neighbour(&self, vertex: u8) -> Hex {
+        match vertex {
+            0 => Hex {
+                    coord: Coord {x:self.coord.x-1,y:self.coord.y+1},
+                    resource:self.resource,
+                    roll:self.roll,
+                    player_rank: self.player_rank.clone()
+            },
+            1 => Hex {
+                    coord: Coord {x:self.coord.x,y:self.coord.y+1},
+                    resource:self.resource,
+                    roll:self.roll,
+                    player_rank: self.player_rank.clone()
+            },
+            2 => Hex {
+                    coord: Coord {x:self.coord.x+1,y:self.coord.y},
+                    resource:self.resource,
+                    roll:self.roll,
+                    player_rank: self.player_rank.clone()
+            },
+            3 => Hex {
+                    coord: Coord {x:self.coord.x+1,y:self.coord.y-1},
+                    resource:self.resource,
+                    roll:self.roll,
+                    player_rank: self.player_rank.clone()
+            },
+            4 => Hex {
+                    coord: Coord {x:self.coord.x,y:self.coord.y-1},
+                    resource:self.resource,
+                    roll:self.roll,
+                    player_rank: self.player_rank.clone()
+            },
+            _ => Hex {
+                    coord: Coord {x:self.coord.x-1,y:self.coord.y},
+                    resource:self.resource,
+                    roll:self.roll,
+                    player_rank: self.player_rank.clone()
+            } 
+        }
+    }
+}
+
+impl Point {
+    pub fn twins(&self) -> Vec<Point> {
+        let mut twins: Vec<Point> = Vec::new();
+        twins.push(Point {
+            building: self.building.clone(),
+            hex: self.hex.neighbour((self.pos - 1)%6),
+            pos: (self.pos + 4)%6,
+        });
+        twins.push(Point {
+            building: self.building.clone(),
+            hex: self.hex.neighbour(self.pos),
+            pos: (self.pos + 2)%6,
+        });
+        twins
+    }
+}

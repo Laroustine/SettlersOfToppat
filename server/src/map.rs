@@ -35,13 +35,13 @@
 use std::collections::HashMap;
 use crate::resource::*;
 
-#[derive(Eq, Hash, PartialEq)]
+#[derive(Eq, Hash, PartialEq, Clone)]
 pub struct Coord {
     pub x: i32,
     pub y: i32,
 }
 
-#[derive(Eq, Hash, PartialEq)]
+#[derive(Eq, Hash, PartialEq, Clone)]
 pub struct Hex {
     pub coord: Coord,
     pub resource: Resource,
