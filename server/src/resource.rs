@@ -1,6 +1,3 @@
-use crate::map::*;
-use crate::player::Player;
-
 #[derive(Eq, Hash, PartialEq, Debug, Clone, Copy)]
 pub enum Resource {
     Wool,

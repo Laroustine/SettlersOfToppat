@@ -49,13 +49,14 @@ pub struct Hex {
     pub player_rank: Option<Vec<i32>>
 }
 
-#[derive(Eq, Hash, PartialEq)]
+#[derive(Eq, Hash, PartialEq, Clone)]
 pub struct Point {
     pub building: Option<(Building, u8)>, //the building, and the player it belongs to
     pub hex: Hex,
     pub pos: u8
 }
 
+#[derive(Clone)]
 pub struct Board {
     pub board: HashMap<Coord,Hex>,
     pub points: HashMap<Point, Option<(Building, u8)>>

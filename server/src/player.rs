@@ -53,7 +53,7 @@ impl Player {
 
     // this indicates to the point "point" that it is occupied by a building.
     // to create a road between two points, this must be called twice
-    pub fn build(&mut self, build_type: &Building, point: &mut Point) {
+    pub fn build(&mut self, build_type: &Building, point: &mut Point, map: &mut Board) {
 
         // look if the point is already occupied
         match &point.building {
@@ -79,6 +79,7 @@ impl Player {
         }
         match build_type {
             Building::Road => {
+                //can probably change into an option return and throw error
                 if !self.has_enough(Building::Road) {
                     println!("Not enough resources to build!");
                     return ()
@@ -110,7 +111,8 @@ impl Player {
                 //refund the upraded Settlement
                 *self.buildings.get_mut(&Building::Settlement).unwrap() += 1;
             }
-        }
+        };
+        map.points.insert(point.clone(), Some((build_type.clone(), self.rank)));
         *self.buildings.get_mut(&build_type).unwrap() -= 1;
     }
 }

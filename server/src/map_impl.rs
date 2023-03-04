@@ -64,6 +64,8 @@ impl Board {
 
 impl Hex {
     pub fn neighbour(&self, vertex: u8) -> Hex {
+        //could simplify into one expression,
+        //but will leave switch for better readability
         match vertex {
             0 => Hex {
                     coord: Coord {x:self.coord.x-1,y:self.coord.y+1},

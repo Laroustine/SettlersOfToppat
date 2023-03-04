@@ -9,10 +9,12 @@ mod tests;
 
 
 fn main() {
-    let m = setup::create_map();
-    setup::setup(1);
+    let mut players: Vec<player::Player> = Vec::new();
+    let mut m = setup::create_map();
+    let mut plyr = player::Player::new();
+    players.push(plyr);
+    setup::setup(players, &mut m);
     println!("{}", m.to_json());
     println!("{}", m.to_json_with_coords());
     server::server();
-    
 }
